@@ -8,86 +8,94 @@
 
     <style>
         body {
-            font-family: "Times New Roman", serif;
-            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
             margin: 0;
-            padding: 0;
+            padding: 20px;
         }
 
         table {
-            margin: 30px auto;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
             border-collapse: collapse;
-            width: 60%;
-            background-color: #ffffff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        table,
-        td {
-            border: 1px solid #ccc;
-        }
-
-        td {
+        table td {
             padding: 12px;
-            font-size: 20px;
+            border-bottom: 1px solid #ddd;
         }
 
-        td:first-child {
-            width: 30%;
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        table td:first-child {
             font-weight: bold;
-            background-color: #f7f7f7;
+            width: 30%;
+            background-color: #f9fafc;
         }
 
-        table img {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 8px;
+        img {
+            width: 100px;
+            height: 100px;
         }
 
         form {
-            width: 60%;
-            margin: 40px auto;
+            max-width: 600px;
+            margin: 0 auto;
             background: #ffffff;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .form-group {
+            margin-bottom: 15px;
             display: flex;
-            align-items: center;
-            margin-bottom: 18px;
+            flex-direction: column;
         }
 
-        .form-group label {
-            width: 150px;
-            font-size: 18px;
+        label {
+            margin-bottom: 5px;
             font-weight: bold;
         }
 
-        .form-group input[type="text"],
-        .form-group input[type="number"],
-        .form-group input[type="email"],
-        .form-group input[type="tel"] {
-            flex: 1;
-            padding: 8px 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="file"] {
+            padding: 8px;
         }
 
-        .form-group input[type="radio"] {
-            margin-left: 10px;
-            margin-right: 5px;
-            transform: scale(1.1);
+        input:focus {
+            outline: none;
+            border-color: #4a90e2;
         }
 
         .gender-group {
             display: flex;
+            gap: 15px;
             align-items: center;
         }
+
+        button {
+            padding: 10px 15px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #357abd;
+        }
     </style>
+
 </head>
 
 <body>
@@ -173,8 +181,10 @@
 
         <div class="form-group">
             <label for="avatar">Avatar:</label>
-            <input type="text" name="avatar" id="avatar" value="<?php echo $avatar ?>">
+            <input type="file" name="avatar" id="avatar" value="<?php echo $avatar ?>">
         </div>
+
+        <button>Update</button>
 
     </form>
 
