@@ -1,5 +1,4 @@
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+<?php if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
@@ -14,25 +13,67 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         setcookie("user", json_encode($user), time() + (86400 * 7), "/");
 
-        echo "<p style='color:green'>Dang ky thanh cong. <a href='login.php'>Dang nhap</a></p>";
+        echo "<p class='success'>Dang ky thanh cong. <a href='login.php'>Dang nhap</a></p>";
     } else {
-        echo "<p style='color:red'>Vui long nhap day du thong tin</p>";
+        echo "<p class='error'>Vui long nhap day du thong tin</p>";
     }
 }
 ?>
 
-<h2>Dang ky tai khoan</h2>
+<style>
+    body {
+        font-family: Arial;
+        background: #f4f6f9;
+    }
 
-<form method="post">
+    .container {
+        width: 400px;
+        margin: 100px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-    Ten dang nhap <br>
-    <input type="text" name="username" required>
-    <br><br>
+    input {
+        width: 100%;
+        padding: 10px;
+    }
 
-    Mat khau <br>
-    <input type="password" name="password" required>
-    <br><br>
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #28a745;
+        color: white;
+        border: none;
+    }
 
-    <button type="submit">Dang ky</button>
+    button:hover {
+        background: #1e7e34;
+    }
 
-</form>
+    .success {
+        color: green;
+    }
+
+    .error {
+        color: red;
+    }
+</style>
+
+<div class="container">
+    <h2>Dang ky tai khoan</h2>
+    <form method="post">
+        Ten dang nhap <br>
+        <input type="text" name="username" required>
+
+        <br><br>
+
+        Mat khau <br>
+        <input type="password" name="password" required>
+
+        <br><br>
+
+        <button type="submit">Dang ky</button>
+    </form>
+</div>

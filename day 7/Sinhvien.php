@@ -71,6 +71,11 @@ class Sinhvien extends Person
         if ($this->diemTB >= 5.0) {
             return "Trung binh";
         }
+
+        if ($this->diemTB == 0.0) {
+            return "";
+        }
+
         return "Yeu";
     }
 }

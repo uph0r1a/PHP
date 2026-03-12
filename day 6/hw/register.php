@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php session_start();
 
 if (isset($_POST['register'])) {
     $username = $_POST['username'];
@@ -19,26 +18,68 @@ if (isset($_POST['register'])) {
 }
 ?>
 
-<h2>Register form</h2>
+<style>
+    body {
+        font-family: Arial;
+        background: #f2f4f7;
+    }
 
-<form method="post">
-    Username:<br>
-    <input type="text" name="username"><br><br>
+    .container {
+        width: 350px;
+        margin: 100px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-    Email:<br>
-    <input type="email" name="email"><br><br>
+    h2 {
+        text-align: center;
+    }
 
-    Password:<br>
-    <input type="password" name="password"><br><br>
+    input {
+        width: 100%;
+        padding: 10px;
+    }
 
-    Confirm Password:<br>
-    <input type="password" name="confirm"><br><br>
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #28a745;
+        color: white;
+        border: none;
+    }
 
-    <button name="register">Register</button>
-</form>
+    button:hover {
+        background: #1e7e34;
+    }
 
-<?php
-if (isset($error)) {
-    echo "<p style='color:red'>$error</p>";
-}
-?>
+    .error {
+        color: red;
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <h2>Register form</h2>
+    <form method="post">
+        Username:<br>
+        <input type="text" name="username"><br><br>
+
+        Email:<br>
+        <input type="email" name="email"><br><br>
+
+        Password:<br>
+        <input type="password" name="password"><br><br>
+
+        Confirm Password:<br>
+        <input type="password" name="confirm"><br><br>
+
+        <button name="register">Register</button>
+    </form>
+
+    <?php if (isset($error)) {
+        echo "<p class='error'>$error</p>";
+    }
+    ?>
+</div>

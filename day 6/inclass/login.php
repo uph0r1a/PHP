@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php session_start();
 
 $message = "";
 
@@ -23,34 +22,84 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 "logged_in" => true
             ];
 
-            $message = "<p style='color:green'>Dang nhap thanh cong</p>";
+            $message = "<p class='success'>Dang nhap thanh cong</p>";
         } else {
-            $message = "<p style='color:red'>Sai ten dang nhap hoac mat khau</p>";
+            $message = "<p class='error'>Sai ten dang nhap hoac mat khau</p>";
         }
     } else {
-        $message = "<p style='color:red'>Chua co tai khoan. Hay dang ky</p>";
+        $message = "<p class='error'>Chua co tai khoan. Hay dang ky</p>";
     }
 }
 ?>
 
-<h2>Dang nhap</h2>
+<style>
+    body {
+        font-family: Arial;
+        background: #f4f6f9;
+    }
 
-<?= $message ?>
+    .container {
+        width: 400px;
+        margin: 100px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-<form method="post">
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+    }
 
-    Ten dang nhap <br>
-    <input type="text" name="username" required>
-    <br><br>
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
 
-    Mat khau <br>
-    <input type="password" name="password" required>
-    <br><br>
+    button:hover {
+        background: #0056b3;
+    }
 
-    <button type="submit">Dang nhap</button>
+    .success {
+        color: green;
+    }
 
-</form>
+    .error {
+        color: red;
+    }
 
-<br>
+    .center {
+        text-align: center;
+    }
+</style>
 
-<a href="register.php">Dang ky</a>
+<div class="container">
+    <h2>Dang nhap</h2>
+    <?= $message ?>
+    <form method="post">
+
+        Ten dang nhap <br>
+        <input type="text" name="username" required>
+
+        <br><br>
+
+        Mat khau <br>
+        <input type="password" name="password" required>
+
+        <br><br>
+
+        <button type="submit">Dang nhap</button>
+    </form>
+
+    <br>
+
+    <div class="center">
+        <a href="register.php">Dang ky</a>
+    </div>
+</div>
