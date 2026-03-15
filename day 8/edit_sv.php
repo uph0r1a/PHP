@@ -76,7 +76,6 @@ $result = mysqli_query($conn, "SELECT * FROM LOP_HOC");
 <h2>Sua sinh vien</h2>
 
 <form method="post">
-
     <label>Ten:
         <input type="text" name="name" value="<?= $student["name"] ?>" required>
     </label>

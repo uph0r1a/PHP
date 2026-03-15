@@ -111,7 +111,7 @@ include 'header.php';
     }
 </style>
 
-<h2 style="padding-left: 70px;">Danh sách sách</h2>
+<h2 style="padding-left: 70px;">Danh sách sách (<a href="add_book.php">Thêm</a>)</h2>
 <div class="row">
     <?php while ($book = mysqli_fetch_assoc($result)): ?>
         <div class="col-md-4">
@@ -129,7 +129,7 @@ include 'header.php';
                         <button type="submit" class="btn btn-primary">Thêm vào giỏ</button>
                     </div>
                 </form>
-                <a href="add_book.php">Thêm</a>
+                
                 <a href="edit_book.php?id=<?= $book["id"] ?>">Sửa</a>
                 <a href="delete_book.php?id=<?= $book["id"] ?>" onclick="return confirm('Xóa quyển sách này')">Xóa</a>
             </div>

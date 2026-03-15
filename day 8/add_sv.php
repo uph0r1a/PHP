@@ -3,7 +3,6 @@
 $lop = mysqli_query($conn, "SELECT * FROM LOP_HOC");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     $name = $_POST["name"];
     $email = $_POST["email"];
     $phone = $_POST["phone"];

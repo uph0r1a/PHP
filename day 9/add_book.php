@@ -1,3 +1,27 @@
+<?php
+require_once "connectDB.php";
+
+$book = mysqli_query($conn, "SELECT * FROM books");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $title = $_POST["title"];
+    $author = $_POST["author"];
+    $price = $_POST["price"];
+    $stock = $_POST["stock"];
+    $description = $_POST["description"];
+
+    $sql = "INSERT INTO books (title,author,price,stock,description)
+            VALUES ('$title','$author','$price','$stock','$description')";
+
+    if (mysqli_query($conn, $sql)) {
+        header("Location: books.php");
+        exit;
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+}
+?>
+
 <h2>Thêm sách</h2>
 
 <form method="post">
@@ -18,3 +42,5 @@
 
     <button type="submit">Thêm sách</button>
 </form>
+
+<?php mysqli_close($conn); ?>
