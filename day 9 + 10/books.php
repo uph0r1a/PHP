@@ -57,6 +57,15 @@ include 'header.php';
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
+    .book-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
     .book-card h5 {
         margin-top: 0;
         color: #333;
@@ -116,20 +125,21 @@ include 'header.php';
     <?php while ($book = mysqli_fetch_assoc($result)): ?>
         <div class="col-md-4">
             <div class="book-card">
-                <h1><?php echo htmlspecialchars($book['title']); ?></h1>
-                <p><strong>Tác giả:</strong> <?php echo htmlspecialchars($book['author']); ?></p>
-                <p><strong>Giá:</strong> <?php echo number_format($book['price'], 0); ?> VNĐ</p>
-                <p><strong>Tồn kho:</strong> <?php echo $book['stock']; ?></p>
-                <p><?php echo htmlspecialchars($book['description']); ?></p>
+                <h1><?= htmlspecialchars($book['title']); ?></h1>
+                <img src="<?= $book['image'] ?>" alt="<?= htmlspecialchars($book['title']); ?> image">
+                <p><strong>Tác giả:</strong> <?= htmlspecialchars($book['author']); ?></p>
+                <p><strong>Giá:</strong> <?= number_format($book['price'], 0); ?> VNĐ</p>
+                <p><strong>Tồn kho:</strong> <?= $book['stock']; ?></p>
+                <p><?= htmlspecialchars($book['description']); ?></p>
                 <form method="POST" style="padding-top: 10px;">
-                    <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
+                    <input type="hidden" name="book_id" value="<?= $book['id']; ?>">
                     <div class="input-group mb-2">
-                        <input type="number" name="quantity" value="1" min="1" max="<?php echo $book['stock']; ?>"
+                        <input type="number" name="quantity" value="1" min="1" max="<?= $book['stock']; ?>"
                             class="form-control" style="max-width: 80px;">
                         <button type="submit" class="btn btn-primary">Thêm vào giỏ</button>
                     </div>
                 </form>
-                
+
                 <a href="edit_book.php?id=<?= $book["id"] ?>">Sửa</a>
                 <a href="delete_book.php?id=<?= $book["id"] ?>" onclick="return confirm('Xóa quyển sách này')">Xóa</a>
             </div>
