@@ -29,7 +29,7 @@
         </div>
 
         @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+            <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
         <table class="table table-bordered table-hover">
@@ -46,31 +46,32 @@
             </thead>
             <tbody>
                 @forelse ($sinhViens as $sv)
-                <tr>
-                    <td><strong>{{ $sv->ma_sv }}</strong></td>
-                    <td>{{ $sv->ho_ten }}</td>
-                    <td>{{ $sv->tuoi }}</td>
-                    <td>{{ $sv->email }}</td>
-                    <td>{{ $sv->lop }}</td>
-                    <td>{{ number_format($sv->diem_tb, 1) }}</td>
-                    <td>
-                        <a href="{{ route('sinhvien.show', $sv->id) }}" class="btn btn-info btn-sm">Xem</a>
-                        <a href="{{ route('sinhvien.edit', $sv->id) }}" class="btn btn-warning btn-sm">Sửa</a>
+                    <tr>
+                        <td><strong>{{ $sv->ma_sv }}</strong></td>
+                        <td>{{ $sv->ho_ten }}</td>
+                        <td>{{ $sv->tuoi }}</td>
+                        <td>{{ $sv->email }}</td>
+                        <td>{{ $sv->lop }}</td>
+                        <td>{{ number_format($sv->diem_tb, 1) }}</td>
+                        <td>
+                            <a href="{{ route('sinhvien.show', $sv->id) }}" class="btn btn-info btn-sm">Xem</a>
+                            <a href="{{ route('sinhvien.edit', $sv->id) }}" class="btn btn-warning btn-sm">Sửa</a>
 
-                        <form action="{{ route('sinhvien.destroy', $sv->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Bạn có chắc muốn xóa sinh viên này?')">
-                                Xóa
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+                            <form action="{{ route('sinhvien.destroy', $sv->id) }}" method="POST"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Bạn có chắc muốn xóa sinh viên này?')">
+                                    Xóa
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
                 @empty
-                <tr>
-                    <td colspan="7" class="text-center">Chưa có sinh viên nào trong danh sách.</td>
-                </tr>
+                    <tr>
+                        <td colspan="7" class="text-center">Chưa có sinh viên nào trong danh sách.</td>
+                    </tr>
                 @endforelse
             </tbody>
         </table>
