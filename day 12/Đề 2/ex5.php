@@ -1,3 +1,65 @@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+    }
+
+    .container {
+        width: 400px;
+        margin: 50px auto;
+        background: #fff;
+        padding: 20px 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    input[type="file"] {
+        padding: 5px;
+    }
+
+    button {
+        margin-top: 15px;
+        width: 100%;
+        padding: 10px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #0056b3;
+    }
+
+    .message {
+        margin-top: 15px;
+    }
+
+    img {
+        margin-top: 10px;
+        border-radius: 5px;
+    }
+</style>
+
 <form method="post" enctype="multipart/form-data">
     <label for="name">Full name</label>
     <input type="text" name="name" id="name" minlength="6" required>
@@ -8,25 +70,32 @@
     <label for="image">Profile pic</label>
     <input type="file" name="image" id="image" required>
 
-    <button type="submit">Submit</button>
+    <button type="submit">Submit Profile</button>
 </form>
 
 <?php
 $valid = true;
 $message = "";
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = trim(htmlspecialchars($_POST["name"]));
+    $name = trim($_POST["name"]);
     $tel = trim($_POST["tel"]);
 
-    if (strlen($name) < 6 && strlen($tel) < 10 && (str_starts_with($tel, "09") || str_starts_with($tel, "08") || str_starts_with($tel, "03") || str_starts_with($tel, "07"))) {
+    if (strlen($name) < 6) {
         $valid = false;
-        $message .= "Invalid name or phone number\n";
+        $message .= "<p style='color:red'>Full name must be at least 6 characters</p>";
+    }
+
+    if (!preg_match('/^(09|08|03|07)[0-9]{8}$/', $tel)) {
+        $valid = false;
+        $message .= "<p style='color:red'>Invalid phone number</p>";
     }
 
     $targetDir = __DIR__ . "/profiles/";
     $fileName = basename(time() . "_" . $_FILES["image"]["name"]);
     $targetFilePath = $targetDir . $fileName;
     $imageFileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
+
     $check = getimagesize($_FILES["image"]["tmp_name"]);
 
     if ($check === false) {
@@ -34,8 +103,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $valid = false;
     }
 
-    if ($_FILES["pic"]["size"] > 3 * 1024 * 1024) {
-        $message .= "<p style='color:red'>File too large (max 2MB)</p>";
+    if ($_FILES["image"]["size"] > 3 * 1024 * 1024) {
+        $message .= "<p style='color:red'>File too large (max 3MB)</p>";
         $valid = false;
     }
 
@@ -50,12 +119,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if ($valid) {
-        if (move_uploaded_file($_FILES["pic"]["tmp_name"], $targetFilePath)) {
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)) {
             $uploadedFile = "profiles/" . $fileName;
-            $message .= "<p style='color:green'>Uploaded photo: $fileName</p><br><img src='$uploadedFile'>";
+
+            $safeName = htmlspecialchars($name);
+            $safeTel = htmlspecialchars($tel);
+
+            $message .= "<p style='color:green'>Profile submitted successfully!</p>";
+            $message .= "<p>Full Name: $safeName</p>";
+            $message .= "<p>Phone: $safeTel</p>";
+            $message .= "<p>Uploaded photo: $fileName</p>";
+            $message .= "<br><img src='$uploadedFile' width='200'>";
         } else {
             $message .= "<p style='color:red'>Error uploading file</p>";
         }
     }
+
+    echo $message;
 }
 ?>
