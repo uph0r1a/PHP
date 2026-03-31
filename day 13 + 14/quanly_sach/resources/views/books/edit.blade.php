@@ -46,7 +46,7 @@
     button {
         width: 100%;
         padding: 10px 0;
-        background-color: #28a745;
+        background-color: #007bff;
         color: white;
         border: none;
         border-radius: 5px;
@@ -56,7 +56,7 @@
     }
 
     button:hover {
-        background-color: #218838;
+        background-color: #0056b3;
     }
 
     a {
